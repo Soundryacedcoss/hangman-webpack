@@ -60,18 +60,20 @@ export const LandingPage = () => {
   console.log("Random word", Random);
   const KeyHandler = (e) => {
     setinput(e.target.value);
+    inputArr.push(e.target.value);
     console.log("clicked", e.target.value);
     var regex = /[A-Z]/g;
     let tempIndex = Random.indexOf(e.target.value);
     const matchval = Random.match(regex);
     setDisable(false);
-    for (let i = 0; i < Random.length; i++) {
+    // for (let i = 0; i < Random.length; i++) {
       if (tempIndex >= 0 && tempIndex <= Random.length) {
         setId1(e.target.id);
         console.log(id1);
         setDisable(true);
         setinput(e.target.value);
-        inputArr.push(matchval);
+        
+        console.log(inputArr);
       } else {
         let temp = attempt - 1;
         setAttempt(temp);
@@ -90,7 +92,7 @@ export const LandingPage = () => {
         }
       }
     }
-  };
+  // };
 
   return (
     <>
@@ -124,12 +126,12 @@ export const LandingPage = () => {
           ))}
         </div>
         <div className="KeyboardDiv">
-          {keyborad.map((item, index) => (
+          {keyborad.map((item) => (
             <button
               value={item}
-             
               className="KeysButton"
               onClick={KeyHandler}
+              disabled={inputArr.find(item1=>item1===item?true:null)}
             >
               {item}
             </button>
