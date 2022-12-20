@@ -5,17 +5,15 @@ export const LandingPage = () => {
   const [input, setinput] = useState("");
   const [Random, setRandom] = useState([]);
   const [inputArr, setInputArr] = useState([]);
-  const [disable, setDisable] = useState(false);
-  const [id1, setId1] = useState("");
-  const [attempt, setAttempt] = useState(7);
-  const ref1 = useRef();
+
+  const [attempt, setAttempt] = useState(6);
   const head = useRef();
   const neck = useRef();
   const hand = useRef();
   const handLeft = useRef();
   const handLeftDown = useRef();
   const handDownRight = useRef();
-  const keyborad = [
+  const keyboard = [
     "A",
     "B",
     "C",
@@ -44,12 +42,15 @@ export const LandingPage = () => {
     "Z",
   ];
   const words = ["PEN", "PENCIL", "SHIRT", "BOOK", "MOBILE"];
-  //   Here i am taking random words from array
 
   useEffect(() => {
+    //   Here i am taking random words from array
     var userWord = words[Math.floor(Math.random() * words.length)];
+    //here i am taking word in an array for display no of input box according to no of letter
     setInputbox(userWord.split(""));
+    console.log(Inputbox);
     setRandom(userWord);
+    // Initialing hide the hangman image
     head.current.style.display = "none";
     neck.current.style.display = "none";
     hand.current.style.display = "none";
@@ -57,46 +58,55 @@ export const LandingPage = () => {
     handLeftDown.current.style.display = "none";
     handDownRight.current.style.display = "none";
   }, []);
-  console.log("Random word", Random);
   const KeyHandler = (e) => {
-    setinput(e.target.value);
+    //  here i am taking the all users value in a array for disable button
     inputArr.push(e.target.value);
-    console.log("clicked", e.target.value);
-    var regex = /[A-Z]/g;
+    // matching the letters here
     let tempIndex = Random.indexOf(e.target.value);
-    const matchval = Random.match(regex);
-    setDisable(false);
-    // for (let i = 0; i < Random.length; i++) {
-      if (tempIndex >= 0 && tempIndex <= Random.length) {
-        setId1(e.target.id);
-        console.log(id1);
-        setDisable(true);
-        setinput(e.target.value);
-        
-        console.log(inputArr);
-      } else {
-        let temp = attempt - 1;
-        setAttempt(temp);
-        if (attempt === 7) {
+    if (tempIndex >= 0 && tempIndex <= Random.length) {
+      // here i am puting the matched letter
+      setinput(e.target.value);
+    } else {
+      let temp = attempt - 1;
+      setAttempt(temp);
+      if (attempt >= 1) {
+        // display the hangman image
+        if (attempt === 6) {
           head.current.style.display = "block";
-        } else if (attempt === 6) {
-          neck.current.style.display = "block";
         } else if (attempt === 5) {
-          hand.current.style.display = "block";
+          neck.current.style.display = "block";
         } else if (attempt === 4) {
-          handLeft.current.style.display = "block";
+          hand.current.style.display = "block";
         } else if (attempt === 3) {
-          handLeftDown.current.style.display = "block";
+          handLeft.current.style.display = "block";
         } else if (attempt === 2) {
+          handLeftDown.current.style.display = "block";
+        } else if (attempt === 1) {
           handDownRight.current.style.display = "block";
+          handLeftDown.current.style.display = "block";
+          handLeft.current.style.display = "block";
+          hand.current.style.display = "block";
+          neck.current.style.display = "block";
+          head.current.style.display = "block";
         }
+      } else if (attempt === 0) {
+        setAttempt(0);
+        alert("Game over");
       }
     }
-  // };
+  };
 
   return (
     <>
-      <div style={{ marginLeft: "13%", width: "40%" }}>
+      <div>
+        <ul>
+          <li>
+            <b className="GameName">HANGMAN</b>
+          </li>
+          <li className="Attempt">{attempt} Attempt left</li>
+        </ul>
+      </div>
+      <div style={{ marginLeft: "53%", width: "40%", marginBottom: "4%" }}>
         <div style={{ display: "flex", position: "relative" }}>
           <p className="mainstand"></p>
           <div>
@@ -118,6 +128,7 @@ export const LandingPage = () => {
           {Inputbox.map((item, index) => (
             <>
               <input
+                // putting the matched letter into boxes
                 value={Random[index] === input ? input : null}
                 className="Input"
                 type="text"
@@ -125,16 +136,19 @@ export const LandingPage = () => {
             </>
           ))}
         </div>
-        <div className="KeyboardDiv">
-          {keyborad.map((item) => (
-            <button
-              value={item}
-              className="KeysButton"
-              onClick={KeyHandler}
-              disabled={inputArr.find(item1=>item1===item?true:null)}
-            >
-              {item}
-            </button>
+        <div className="Keyborad">
+          {keyboard.map((item) => (
+            <>
+              <button
+                className="KeysButton"
+                // here i am disabling the button
+                disabled={inputArr.find((val) => (val === item ? true : null))}
+                value={item}
+                onClick={KeyHandler}
+              >
+                {item}
+              </button>
+            </>
           ))}
         </div>
       </div>

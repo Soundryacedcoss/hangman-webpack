@@ -7,16 +7,13 @@
   text-align: center;
   border-style: none;
   border-radius: 12px;
-  background-color: dodgerblue;
-  color: white;
+  color: black;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 28px;
   cursor: pointer;
 }
-.KeyboardDiv {
-  /* width: 60%; */
-  /* margin-left: 20%; */
- /* padding: 2%; */
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+.KeysButton:hover {
+  box-shadow: rgba(0, 0, 106, 0.25) 0px 30px 60px -12px inset,
+    rgba(160, 188, 150, 0.3) 0px 18px 36px -18px inset;
 }
 .Input {
   width: 5%;
@@ -58,29 +55,54 @@
 .downRight {
   margin: -6em 0em 0em 4.3em;
 }
-.stand{
+.stand {
   height: 50px;
 }
-.mainstand{
+.mainstand {
   height: 15px;
   width: 15em;
-  margin: -0.9em -5.8em 1em -8em ;
+  margin: -0.9em -5.8em 1em -8em;
   background: #0b2429;
   position: absolute;
 }
-.standheight{
+.standheight {
   height: 358px;
   width: 1em;
   background: #0b2429;
   margin: -0.8em -0.4em -0.5em -8em;
 }
 /* End of hangman styling */
-.inputArea{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: -9em;
+.inputArea {
+  width: 60%;
+  margin-left: 40%;
 }
-.Container{
-  margin-top: -4em;
-  margin-left: 10em;
+.Keyborad {
+  width: 90%;
+  margin-left: 3%;
+  margin-right: 6%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 2%;
+  background-color: dodgerblue;
+}
+
+li {
+  display: inline-block;
+}
+.Hangmanlogo {
+  width: 14%;
+}
+.Attempt {
+  float: right;
+  padding: 2%;
+  font-weight: bold;
+  color: red;
+  border: solid red 2 px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.GameName {
+  margin-top: -14%;
+  font-family: "Roboto Slab", serif;
+  font-weight: bold;
+  color: dodgerblue;
+  font-size: 20px;
 }
